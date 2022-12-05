@@ -3,6 +3,78 @@
 This repository contains the source code and configuration files of the Arduino Core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards).
 
+
+
+## SAMDaaNo21 Toevoegen
+
+
+
+### Bootloader
+
+Folder van de Arduino Zero `zero` gedupliceerd en hernoemd naar `samdaano21`.
+
+#### Linker script
+
+`bootloader_samd21x18.ld` -> `bootloader_samd21x16.ld `
+
+Dit is het linker script. Daarin is enkel de memory mapping aangepast. De ATSAMD21x18 versie heeft 256kb flash en 32kb SRAM. De ATSAMD21x16 heeft 64kb flash en 8kb SRAM.
+
+````
+MEMORY
+{
+  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x2000 /* First 8KB used by bootloader */
+  RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00002000-0x0400 /* last 4 bytes used by bootloader to keep data between resets, but reserves 1024 bytes for sketches to have same possibility */
+}
+````
+
+#### Makefile
+
+`Makefile`
+
+````
+LD_SCRIPT=bootloader_samd21x16.ld
+````
+
+Naam naar nieuw bestand.
+
+**Nog wat aanpasingen nodig.**
+
+#### Board definitions
+
+````cpp
+#define STRING_PRODUCT "SAMDaaNo21"
+[...]
+#define BOOT_DOUBLE_TAP_ADDRESS           (0x20001FFCul) // 8kb ram - 4 bytes = 10x8188 0x1FFC
+````
+
+Belangrijk is hier dat het double tap adres anders is dan bij de Zero omdat we een keiner geheugen hebben in de G16.
+
+
+
+
+
+
+
+
+
+
+
+### Arduino IDE ondersteuning
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Installation on Arduino IDE
 
 This core is available as a package in the Arduino IDE cores manager.
@@ -37,7 +109,7 @@ Pull Request on github.
    git clone https://github.com/arduino/ArduinoCore-API.git
    ```
 1. Create an `<SKETCHBOOK>/hardware/arduino-git` folder, where `<SKETCHBOOK>` is the location of your
-  Arduino sketchbook.
+    Arduino sketchbook.
 1. Change directories:
    ```
    cd <SKETCHBOOK>/hardware/arduino-git

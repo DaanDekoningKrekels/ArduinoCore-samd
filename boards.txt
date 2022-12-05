@@ -14,6 +14,97 @@
 # License along with this library; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 
+# Documentatie: https://arduino.github.io/arduino-cli/0.29/platform-specification/
+
+
+# SAMDaaNo21 (Prorgamming Port)
+# ---------------------------------------
+samdaano21_edbg.name=SAMDaaNo21 (Programming Port)
+samdaano21_edbg.vid.0=0x03eb
+samdaano21_edbg.pid.0=0x2157
+samdaano21_edbg.upload_port.0.vid=0x03eb
+samdaano21_edbg.upload_port.0.pid=0x2157
+samdaano21_edbg.upload_port.1.board=samdaano21_edbg
+
+samdaano21_edbg.upload.tool=openocd
+samdaano21_edbg.upload.tool.default=openocd
+samdaano21_edbg.upload.tool.network=arduino_ota
+samdaano21_edbg.upload.protocol=sam-ba
+samdaano21_edbg.upload.maximum_size=65536
+samdaano21_edbg.upload.maximum_data_size=8192
+samdaano21_edbg.upload.use_1200bps_touch=false
+samdaano21_edbg.upload.wait_for_upload_port=false
+samdaano21_edbg.upload.native_usb=false
+samdaano21_edbg.build.mcu=cortex-m0plus
+samdaano21_edbg.build.f_cpu=48000000L
+samdaano21_edbg.build.usb_product="SAMDaaNo21"
+samdaano21_edbg.build.usb_manufacturer="FLWSB"
+samdaano21_edbg.build.board=SAMDAANO21
+samdaano21_edbg.build.core=arduino
+samdaano21_edbg.build.extra_flags=-D__SAMD21G16A__ {build.usb_flags}
+samdaano21_edbg.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+samdaano21_edbg.build.openocdscript=openocd_scripts/samdaano21.cfg
+# naam van variants folder
+samdaano21_edbg.build.variant=samdaano21
+samdaano21_edbg.build.variant_system_lib=
+samdaano21_edbg.build.vid=0x03EB
+samdaano21_edbg.build.pid=0x2402
+samdaano21_edbg.bootloader.tool=openocd
+samdaano21_edbg.bootloader.tool.default=openocd
+samdaano21_edbg.bootloader.file=samdaano21/samd21_sam_ba.bin
+
+# SAMDaaNo21 (Native USB Port)
+# --------------------------------------
+samdaano21_native.name=SAMDaaNo21 (Native USB Port)
+samdaano21_native.vid.0=0x03EB
+samdaano21_native.pid.0=0x2402
+samdaano21_native.vid.1=0x2341
+samdaano21_native.pid.1=0x004d
+samdaano21_native.vid.2=0x2341
+samdaano21_native.pid.2=0x824d
+samdaano21_native.vid.3=0x2341
+samdaano21_native.pid.3=0x024d
+samdaano21_native.upload_port.0.vid=0x03EB
+samdaano21_native.upload_port.0.pid=0x2402
+samdaano21_native.upload_port.1.vid=0x2341
+samdaano21_native.upload_port.1.pid=0x004d
+samdaano21_native.upload_port.2.vid=0x2341
+samdaano21_native.upload_port.2.pid=0x824d
+samdaano21_native.upload_port.3.vid=0x2341
+samdaano21_native.upload_port.3.pid=0x024d
+samdaano21_native.upload_port.4.board=samdaano21_native
+
+samdaano21_native.upload.tool=bossac
+samdaano21_native.upload.tool.default=bossac
+samdaano21_native.upload.tool.network=arduino_ota
+samdaano21_native.upload.protocol=sam-ba
+samdaano21_native.upload.maximum_size=65536
+samdaano21_native.upload.maximum_data_size=8192
+samdaano21_native.upload.use_1200bps_touch=true
+samdaano21_native.upload.wait_for_upload_port=true
+samdaano21_native.upload.native_usb=true
+samdaano21_native.build.mcu=cortex-m0plus
+samdaano21_native.build.f_cpu=48000000L
+samdaano21_native.build.usb_product="SAMDaaNo21"
+samdaano21_native.build.usb_manufacturer="FLWSB"
+samdaano21_native.build.board=SAMDAANO21
+samdaano21_native.build.core=arduino
+samdaano21_native.build.extra_flags=-D__SAMD21G16A__ {build.usb_flags}
+samdaano21_native.build.ldscript=linker_scripts/gcc/flash_with_bootloader.ld
+samdaano21_native.build.openocdscript=openocd_scripts/samdaano21.cfg
+# naam van variants folder
+samdaano21_native.build.variant=samdaano21
+samdaano21_native.build.variant_system_lib=
+samdaano21_native.build.vid=0x03EB
+samdaano21_native.build.pid=0x2402
+samdaano21_native.bootloader.tool=openocd
+samdaano21_native.bootloader.tool.default=openocd
+samdaano21_native.bootloader.file=samdaano21/samd21_sam_ba.bin
+
+
+
+
+
 # Arduino Zero (Prorgamming Port)
 # ---------------------------------------
 arduino_zero_edbg.name=Arduino Zero (Programming Port)
