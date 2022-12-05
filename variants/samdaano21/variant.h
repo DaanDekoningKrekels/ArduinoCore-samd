@@ -125,35 +125,44 @@ static const uint8_t ATN = PIN_ATN;
 #define PAD_SERIAL_RX       (SERCOM_RX_PAD_1)
 
 // Serial1
-#define PIN_SERIAL1_RX       (0ul)
-#define PIN_SERIAL1_TX       (1ul)
-#define PAD_SERIAL1_TX       (UART_TX_PAD_2)
-#define PAD_SERIAL1_RX       (SERCOM_RX_PAD_3)
+// Serial voor de LoRaWAN module
+#define PIN_SERIAL1_RX       (9ul)
+#define PIN_SERIAL1_TX       (8ul)
+#define PAD_SERIAL1_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL1_RX       (SERCOM_RX_PAD_1)
+
+// Serial2
+#define PIN_SERIAL2_RX       (16ul)
+#define PIN_SERIAL2_TX       (17ul)
+#define PAD_SERIAL2_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
+
 
 /*
  * SPI Interfaces
+ * Geen SPI
  */
-#define SPI_INTERFACES_COUNT 1
+// #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO         (22u)
-#define PIN_SPI_MOSI         (23u)
-#define PIN_SPI_SCK          (24u)
-#define PERIPH_SPI           sercom4
-#define PAD_SPI_TX           SPI_PAD_2_SCK_3
-#define PAD_SPI_RX           SERCOM_RX_PAD_0
+// #define PIN_SPI_MISO         (22u)
+// #define PIN_SPI_MOSI         (23u)
+// #define PIN_SPI_SCK          (24u)
+// #define PERIPH_SPI           sercom4
+// #define PAD_SPI_TX           SPI_PAD_2_SCK_3
+// #define PAD_SPI_RX           SERCOM_RX_PAD_0
 
-static const uint8_t SS	  = PIN_A2 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
-static const uint8_t MOSI = PIN_SPI_MOSI ;
-static const uint8_t MISO = PIN_SPI_MISO ;
-static const uint8_t SCK  = PIN_SPI_SCK ;
+// static const uint8_t SS	  = PIN_A2 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
+// static const uint8_t MOSI = PIN_SPI_MOSI ;
+// static const uint8_t MISO = PIN_SPI_MISO ;
+// static const uint8_t SCK  = PIN_SPI_SCK ;
 
 /*
  * Wire Interfaces
  */
 #define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_SDA         (20u)
-#define PIN_WIRE_SCL         (21u)
+#define PIN_WIRE_SDA         (12u)
+#define PIN_WIRE_SCL         (13u)
 #define PERIPH_WIRE          sercom3
 #define WIRE_IT_HANDLER      SERCOM3_Handler
 
@@ -163,20 +172,21 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 /*
  * USB
  */
-#define PIN_USB_HOST_ENABLE (27ul)
+#define PIN_USB_HOST_ENABLE (27ul) // TODO: Wat is dit? 
 #define PIN_USB_DM          (28ul)
 #define PIN_USB_DP          (29ul)
 
 /*
  * I2S Interfaces
+ * Geen I2S
  */
-#define I2S_INTERFACES_COUNT 1
+// #define I2S_INTERFACES_COUNT 1
 
-#define I2S_DEVICE          0
-#define I2S_CLOCK_GENERATOR 3
-#define PIN_I2S_SD          (9u)
-#define PIN_I2S_SCK         (1u)
-#define PIN_I2S_FS          (0u)
+// #define I2S_DEVICE          0
+// #define I2S_CLOCK_GENERATOR 3
+// #define PIN_I2S_SD          (9u)
+// #define PIN_I2S_SCK         (1u)
+// #define PIN_I2S_FS          (0u)
 
 #ifdef __cplusplus
 }
@@ -201,6 +211,7 @@ extern SERCOM sercom5;
 
 extern Uart Serial;
 extern Uart Serial1;
+extern Uart Serial2;
 
 #endif
 
@@ -231,7 +242,8 @@ unsigned int PINCOUNT_fn();
 #define SERIAL_PORT_MONITOR         Serial
 // Serial has no physical pins broken out, so it's not listed as HARDWARE port
 #define SERIAL_PORT_HARDWARE        Serial1
-#define SERIAL_PORT_HARDWARE_OPEN   Serial1
+#define SERIAL_PORT_HARDWARE        Serial2
+#define SERIAL_PORT_HARDWARE_OPEN   Serial2
 
 #endif /* _VARIANT_ARDUINO_ZERO_ */
 
