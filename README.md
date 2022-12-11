@@ -1,98 +1,57 @@
-# Arduino Core for SAMD21 CPU
+# FLWSB Arduino Core for SAMD21 CPU
 
 This repository contains the source code and configuration files of the Arduino Core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards).
 
 
-
-## SAMDaaNo21 Toevoegen
-
+## SAMDaaNo21 toevoegen aan de Arduino IDE
 
 
-### Bootloader
+Om de SAMDaaNo21 werkende te krijgen met een IDE zoals die van Arduino moeten we eerst een compatibele bootloader op de MCU hebben staan. Wij maken gebruik van de ATSAMD21G16B en spijtig genoeg zijn hier geen kant en klare bootloaders voor. Omdat we de printplaat zelf hebben ontworpen zijn er uiteraard ook geen volledig compatibele configuraties beschikbaar.
 
-Folder van de Arduino Zero `zero` gedupliceerd en hernoemd naar `samdaano21`.
+Het toevoegen voor ondersteuning verloopt in een aantal stappen:
 
-#### Linker script
+- Bootloader aanpassen aan de [ATSAMD21G16B](https://www.microchip.com/en-us/product/ATSAMD21G16)
+- Bootloader compileren
+- Een Arduino variant toevoegen voor de SAMDaaNo21
+  - Linker script aanpassen
+  - OpenOCD script aanpassen
+  - Pinout en functies definiëren
 
-`bootloader_samd21x18.ld` -> `bootloader_samd21x16.ld `
+Bij deze stappen hebben we ons gebaseerd op de Arduino Zero. Deze heeft echter een ATSAMD21G18A, dat is een variant met meer geheugen.
 
-Dit is het linker script. Daarin is enkel de memory mapping aangepast. De ATSAMD21x18 versie heeft 256kb flash en 32kb SRAM. De ATSAMD21x16 heeft 64kb flash en 8kb SRAM.
+Alle nodige broncode is te verkrijgen van de [ArduinoCore-samd](https://github.com/arduino/ArduinoCore-samd) GitHub repository. ([Onze fork](https://github.com/DaanDekoningKrekels/ArduinoCore-samd))
 
-````
-MEMORY
-{
-  FLASH (rx) : ORIGIN = 0x00000000, LENGTH = 0x2000 /* First 8KB used by bootloader */
-  RAM (rwx) : ORIGIN = 0x20000000, LENGTH = 0x00002000-0x0400 /* last 4 bytes used by bootloader to keep data between resets, but reserves 1024 bytes for sketches to have same possibility */
-}
-````
+Belangrijke mappen en bestanden:
 
-#### Makefile
+| Naam         | Beschrijving                                                 |
+| ------------ | ------------------------------------------------------------ |
+| bootloaders/ | Map met broncode voor alle type Arduino's.                   |
+| variants/    | Map met broncode voor alle verschillende varianten van Arduino's om compatibel te zijn met de Arduino bibliotheken. |
+| boards.txt   | Bestand met definities en instellingen voor Arduino borden weer te geven in de Arduino IDE onder `tools`-> `board: xxx` |
 
-`Makefile`
 
-````
-LD_SCRIPT=bootloader_samd21x16.ld
-````
+## Bronnen
 
-Naam naar nieuw bestand.
+Porting Arduino Zero to another samd21g variant: https://forum.arduino.cc/t/porting-arduino-zero-to-another-samd21g-variant/400138/3
 
-**Nog wat aanpasingen nodig.**
+https://www.instructables.com/Arduino-IDE-Creating-Custom-Boards/
 
-#### Board definitions
-
-````cpp
-#define STRING_PRODUCT "SAMDaaNo21"
-[...]
-#define BOOT_DOUBLE_TAP_ADDRESS           (0x20001FFCul) // 8kb ram - 4 bytes = 10x8188 0x1FFC
-````
-
-Belangrijk is hier dat het double tap adres anders is dan bij de Zero omdat we een keiner geheugen hebben in de G16.
+https://hackaday.io/project/8007-hack/log/41354-docs-how-the-variant-system-works-on-arduino-zero-boards
 
 
 
 
 
+## Installatie binnen de Arduino IDE
 
-
-
-
-
-
-### Arduino IDE ondersteuning
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Installation on Arduino IDE
-
-This core is available as a package in the Arduino IDE cores manager.
-Just open the "Boards Manager" and install the package called:
-
-"Arduino SAMD Boards (32-bit ARM Cortex-M0+)"
-
-## Support
-
-There is a dedicated section of the Arduino Forum for general discussion and project assistance:
-
-http://forum.arduino.cc/index.php?board=98.0
+De onderstuning voor het FLWSB bord is nog niet op een toegankelijke manier te installeren. Je kan echter wel de stappen volgen onder [#Developing](#Developing) om het toe te voegen. 
 
 ## Bugs or Issues
 
 If you find a bug you can submit an issue here on github:
 
-https://github.com/arduino/ArduinoCore-samd/issues
+https://github.com/DaanDekoningKrekels/ArduinoCore-samd/issues
 
 Before posting a new issue, please check if the same problem has been already reported by someone else
 to avoid duplicates.
@@ -116,7 +75,7 @@ Pull Request on github.
    ```
 1. Clone this repo:
    ```
-   git clone https://github.com/arduino/ArduinoCore-samd.git samd
+   git clone https://github.com/DaanDekoningKrekels/ArduinoCore-samd.git samd
    ```
 1. Change directories:
    ```
@@ -128,24 +87,6 @@ Pull Request on github.
    ```
    where `<ARDUINO_CORE_API>` is the location where you've cloned the ArduinoCore-API repository to.
 1. Restart the IDE.
-
-## Hourly builds
-
-This repository is under a Continuous Integration system that every hour checks if there are updates and
-builds a release for testing (the so called "Hourly builds").
-
-The hourly builds are available through Boards Manager. If you want to install them:
-  1. Open the **Preferences** of the Arduino IDE.
-  2. Add this URL `http://downloads.arduino.cc/Hourly/samd/package_samd-hourly-build_index.json` in the **Additional Boards Manager URLs** field, and click OK.
-  3. Open the **Boards Manager** (menu Tools->Board->Board Manager...)
-  4. Install **Arduino SAMD core - Hourly build**
-  5. Select one of the boards under **SAMD Hourly build XX** in Tools->Board menu
-  6. Compile/Upload as usual
-
-If you already installed an hourly build and you want to update it with the latest:
-  1. Open the **Boards Manager** (menu Tools->Board->Board Manager...)
-  2. Remove **Arduino SAMD core - Hourly build**
-  3. Install again **Arduino SAMD core - Hourly build**, the Board Manager will download the latest build replacing the old one.
 
 ## License and credits
 

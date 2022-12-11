@@ -82,6 +82,47 @@ extern "C" unsigned int PINCOUNT_fn();
  */
 // #define digitalPinToTimer(P)
 
+#define PA02        (0ul)
+#define PA03        (1ul)
+#define PB08        (2ul)
+#define PB09        (3ul)
+#define PA04        (4ul)
+#define PA05        (5ul)
+#define S0TX        (4ul) // TX SERCOM0 UART
+#define S0RX        (5ul) // RX
+#define PA06        (6ul)
+#define PA07        (7ul)
+#define PA08        (8ul)
+#define PA09        (9ul)
+#define S2TX        (8ul) // TX SECOM 2 UART
+#define S2RX        (9ul) // RX
+#define PA10        (10ul)
+#define PA11        (11ul)
+#define PA12        (12ul)
+#define PA13        (13ul)
+#define S4SDA       (12ul) // SDA SERCOM 4 I2C
+#define S4SCL       (13ul) // SCL
+
+// Andere kant
+#define PB03        (14ul)
+#define PB22        (15ul)
+#define PA23        (16ul)
+#define PA22        (17ul)
+#define S5RX        (16ul) // RX SERCOM 5 UART
+#define S5TX        (17ul) // TX
+#define PA21        (18ul)
+#define PA20        (19ul)
+#define PA19        (20ul)
+#define PA18        (21ul)
+#define PA17        (22ul)
+#define PA16        (23ul)
+#define S3SS        (20ul) // SS SERCOM 3 SPI
+#define S3MISO      (21ul) // MISO
+#define S3SCK       (22ul) // SCK
+#define S3MOSI      (23ul) // MOSI
+#define PA15        (24ul)
+#define PA14        (25ul)
+
 // LEDs
 //#define PIN_LED_13           (13u)
 //#define PIN_LED_RXL          (25u)
@@ -119,42 +160,42 @@ static const uint8_t ATN = PIN_ATN;
  * Serial interfaces
  */
 // Serial (EDBG)
-#define PIN_SERIAL_RX       (5ul)
-#define PIN_SERIAL_TX       (4ul)
-#define PAD_SERIAL_TX       (UART_TX_PAD_0)
-#define PAD_SERIAL_RX       (SERCOM_RX_PAD_1)
-
-// Serial1
-// Serial voor de LoRaWAN module
-#define PIN_SERIAL1_RX       (9ul)
-#define PIN_SERIAL1_TX       (8ul)
+#define PIN_SERIAL1_RX       (5ul)
+#define PIN_SERIAL1_TX       (4ul)
 #define PAD_SERIAL1_TX       (UART_TX_PAD_0)
 #define PAD_SERIAL1_RX       (SERCOM_RX_PAD_1)
 
-// Serial2
-#define PIN_SERIAL2_RX       (16ul)
-#define PIN_SERIAL2_TX       (17ul)
+// Serial1
+// Serial voor de LoRaWAN module
+#define PIN_SERIAL2_RX       (9ul)
+#define PIN_SERIAL2_TX       (8ul)
 #define PAD_SERIAL2_TX       (UART_TX_PAD_0)
 #define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
+
+// Serial2
+#define PIN_SERIAL3_RX       (16ul)
+#define PIN_SERIAL3_TX       (17ul)
+#define PAD_SERIAL3_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL3_RX       (SERCOM_RX_PAD_1)
+
 
 
 /*
  * SPI Interfaces
- * Geen SPI
  */
 // #define SPI_INTERFACES_COUNT 1
 
-// #define PIN_SPI_MISO         (22u)
-// #define PIN_SPI_MOSI         (23u)
-// #define PIN_SPI_SCK          (24u)
-// #define PERIPH_SPI           sercom4
-// #define PAD_SPI_TX           SPI_PAD_2_SCK_3
-// #define PAD_SPI_RX           SERCOM_RX_PAD_0
+#define PIN_SPI_MISO         (22u)
+#define PIN_SPI_MOSI         (24u)
+#define PIN_SPI_SCK          (23u)
+#define PERIPH_SPI           sercom3
+#define PAD_SPI_TX           SPI_PAD_1_SCK_3
+#define PAD_SPI_RX           SERCOM_RX_PAD_0
 
-// static const uint8_t SS	  = PIN_A2 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
-// static const uint8_t MOSI = PIN_SPI_MOSI ;
-// static const uint8_t MISO = PIN_SPI_MISO ;
-// static const uint8_t SCK  = PIN_SPI_SCK ;
+static const uint8_t SS	  = PA19 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
+static const uint8_t MOSI = PIN_SPI_MOSI ;
+static const uint8_t MISO = PIN_SPI_MISO ;
+static const uint8_t SCK  = PIN_SPI_SCK ;
 
 /*
  * Wire Interfaces
@@ -163,8 +204,8 @@ static const uint8_t ATN = PIN_ATN;
 
 #define PIN_WIRE_SDA         (12u)
 #define PIN_WIRE_SCL         (13u)
-#define PERIPH_WIRE          sercom3
-#define WIRE_IT_HANDLER      SERCOM3_Handler
+#define PERIPH_WIRE          sercom4
+#define WIRE_IT_HANDLER      SERCOM4_Handler
 
 static const uint8_t SDA = PIN_WIRE_SDA;
 static const uint8_t SCL = PIN_WIRE_SCL;
@@ -212,6 +253,7 @@ extern SERCOM sercom5;
 extern Uart Serial;
 extern Uart Serial1;
 extern Uart Serial2;
+extern Uart Serial3;
 
 #endif
 
@@ -239,11 +281,16 @@ unsigned int PINCOUNT_fn();
 // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
 //                            pins are NOT connected to anything by default.
 #define SERIAL_PORT_USBVIRTUAL      SerialUSB
-#define SERIAL_PORT_MONITOR         Serial
+#define SERIAL_PORT_MONITOR         SerialUSB
+// Alias Serial to SerialUSB
+#define Serial                      SerialUSB
+
 // Serial has no physical pins broken out, so it's not listed as HARDWARE port
 #define SERIAL_PORT_HARDWARE        Serial1
+#define SERIAL_PORT_HARDWARE_OPEN   Serial1
 #define SERIAL_PORT_HARDWARE        Serial2
-#define SERIAL_PORT_HARDWARE_OPEN   Serial2
+#define SERIAL_PORT_HARDWARE        Serial3
+#define SERIAL_PORT_HARDWARE_OPEN   Serial3
 
-#endif /* _VARIANT_ARDUINO_ZERO_ */
+#endif /* _VARIANT_SAMDAANO21_ */
 
