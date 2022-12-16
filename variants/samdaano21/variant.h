@@ -183,15 +183,16 @@ static const uint8_t ATN = PIN_ATN;
 
 /*
  * SPI Interfaces
+ * https://learn.sparkfun.com/tutorials/adding-more-sercom-ports-for-samd-boards/all
  */
-// #define SPI_INTERFACES_COUNT 1
+#define SPI_INTERFACES_COUNT 1
 
 #define PIN_SPI_MISO         (22u)
 #define PIN_SPI_MOSI         (24u)
 #define PIN_SPI_SCK          (23u)
 #define PERIPH_SPI           sercom3
-#define PAD_SPI_TX           SPI_PAD_1_SCK_3
-#define PAD_SPI_RX           SERCOM_RX_PAD_0
+#define PAD_SPI_TX           SPI_PAD_0_SCK_1
+#define PAD_SPI_RX           SERCOM_RX_PAD_2
 
 static const uint8_t SS	  = PA19 ;	// SERCOM4 last PAD is present on A2 but HW SS isn't used. Set here only for reference.
 static const uint8_t MOSI = PIN_SPI_MOSI ;
