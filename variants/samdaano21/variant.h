@@ -167,10 +167,10 @@ static const uint8_t ATN = PIN_ATN;
 
 // Serial1
 // Serial voor de LoRaWAN module
-#define PIN_SERIAL2_RX       (9ul)
-#define PIN_SERIAL2_TX       (8ul)
-#define PAD_SERIAL2_TX       (UART_TX_PAD_0)
-#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
+#define PIN_SERIAL2_RX       (8ul)
+#define PIN_SERIAL2_TX       (10ul)
+#define PAD_SERIAL2_TX       (UART_TX_PAD_2)
+#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_0)
 
 // Serial2
 #define PIN_SERIAL3_RX       (16ul)
@@ -288,6 +288,7 @@ unsigned int PINCOUNT_fn();
 // Serial has no physical pins broken out, so it's not listed as HARDWARE port
 #define SERIAL_PORT_HARDWARE        Serial1
 #define SERIAL_PORT_HARDWARE_OPEN   Serial1
+#define SERIAL_PORT_HARDWARE_OPEN   Serial2
 #define SERIAL_PORT_HARDWARE        Serial2
 #define SERIAL_PORT_HARDWARE        Serial3
 #define SERIAL_PORT_HARDWARE_OPEN   Serial3
