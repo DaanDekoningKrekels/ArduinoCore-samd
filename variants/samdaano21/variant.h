@@ -292,5 +292,8 @@ unsigned int PINCOUNT_fn();
 #define SERIAL_PORT_HARDWARE        Serial3
 #define SERIAL_PORT_HARDWARE_OPEN   Serial3
 
-#endif /* _VARIANT_SAMDAANO21_ */
+// Alias Serial2 voor LoRa module
+#define SerialLoRa                  Serial2
+
+#endif /* _VARIANT_ARDUINO_SAMDAANO21_ */
 
