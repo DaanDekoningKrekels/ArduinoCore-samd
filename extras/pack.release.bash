@@ -47,7 +47,7 @@ mv ../$FILENAME .
 CHKSUM=`sha256sum $FILENAME | awk '{ print $1 }'`
 SIZE=`wc -c $FILENAME | awk '{ print $1 }'`
 
-cat extras/package_index.json.NewTag.template |
+cat extras/package_index.json.Release.template |
 # sed "s/%%BUILD_NUMBER%%/${BUILD_NUMBER}/" |
 # sed "s/%%CURR_TIME%%/${CURR_TIME_SED}/" |
 sed "s/%%VERSION%%/${VERSION}/" |
