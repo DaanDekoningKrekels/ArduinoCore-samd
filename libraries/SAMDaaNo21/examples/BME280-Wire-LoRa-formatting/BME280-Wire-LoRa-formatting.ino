@@ -17,7 +17,7 @@ unsigned long delayTime;
 
 void getDataFormattedBME(byte (&BMEdata)[5]) {
   /*
-    Vraag temp, pressure en humidity op van BME en format als 4 bytes in een array meegegeven als parameter.
+    Vraag temp, pressure en humidity op van BME en format als 5 bytes in een array meegegeven als parameter.
 
     | Byte nr | Name            | Sensor range     | On Node MCU | Reformat |
     | ------- | --------------- | ---------------- | ----------- | -------- |
@@ -52,6 +52,7 @@ void getDataFormattedBME(byte (&BMEdata)[5]) {
   // Druk int opsplitsen in twee bytes
   BMEdata[2] = highByte(pressure);
   BMEdata[3] = lowByte(pressure);
+  
   BMEdata[4] = humidity;
 }
 
