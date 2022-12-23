@@ -183,7 +183,7 @@ static const uint8_t ATN = PIN_ATN;
 
 /*
  * SPI Interfaces
- * https://learn.sparkfun.com/tutorials/adding-more-sercom-ports-for-samd-boards/all
+ * https://learn.sparkfun.com/tutorials/adding-more-sercom-ports-for-samd-boards/all#adding-an-spi
  */
 #define SPI_INTERFACES_COUNT 1
 
@@ -201,6 +201,7 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 
 /*
  * Wire Interfaces
+ * https://learn.sparkfun.com/tutorials/adding-more-sercom-ports-for-samd-boards/all#adding-an-i2c
  */
 #define WIRE_INTERFACES_COUNT 1
 
