@@ -23,6 +23,9 @@
 
 void setup() {
   SerialUSB.begin(9600);  // open the serial port at 9600 bps:
+  while (!SerialUSB) {
+    ;  // wait for serial port to connect. Needed for native USB port only
+  }
   SerialUSB.println("Niet opgestart");
 
   Wire.begin();  // join i2c bus (address optional for master)
