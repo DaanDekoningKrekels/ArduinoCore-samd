@@ -82,19 +82,26 @@ extern "C" unsigned int PINCOUNT_fn();
  */
 // #define digitalPinToTimer(P)
 
+/*
+ * Oplijsting van alle pinnen in de volgorde van de PCB.
+ * Naam staat gelijk aan de waarde op het silkscreen.
+ *
+ * Foutje: PA09 op de silkscreen is PA07 in realiteit.
+ */
+
 #define PA02        (0ul)
 #define PA03        (1ul)
 #define PB08        (2ul)
 #define PB09        (3ul)
 #define PA04        (4ul)
 #define PA05        (5ul)
-#define S0TX        (4ul) // TX SERCOM0 UART
+#define S0TX        (4ul) // TX SERCOM 0 UART
 #define S0RX        (5ul) // RX
 #define PA06        (6ul)
 #define PA07        (7ul)
 #define PA08        (8ul)
 #define PA09        (9ul)
-#define S2TX        (8ul) // TX SECOM 2 UART
+#define S2TX        (8ul) // TX SERCOM 2 UART
 #define S2RX        (9ul) // RX
 #define PA10        (10ul)
 #define PA11        (11ul)
@@ -123,7 +130,7 @@ extern "C" unsigned int PINCOUNT_fn();
 #define PA15        (24ul)
 #define PA14        (25ul)
 
-// LEDs
+// LEDs niet aanwezig
 //#define PIN_LED_13           (13u)
 //#define PIN_LED_RXL          (25u)
 //#define PIN_LED_TXL          (26u)
@@ -135,13 +142,13 @@ extern "C" unsigned int PINCOUNT_fn();
 /*
  * Analog pins
  */
-#define PIN_A0               (0ul)
-#define PIN_A1               (1ul)
-#define PIN_A2               (2ul)
-#define PIN_A3               (3ul)
-#define PIN_A4               (6ul)
-#define PIN_A5               (14ul)
-#define PIN_DAC0             (26ul)
+#define PIN_DAC0             (26ul) // PA02
+#define PIN_A0               (0ul)  // PA02
+#define PIN_A1               (1ul)  // PA03
+#define PIN_A2               (2ul)  // PB08
+#define PIN_A3               (3ul)  // PB09
+#define PIN_A4               (6ul)  // PA06
+#define PIN_A5               (14ul) // PB03
 
 static const uint8_t A0  = PIN_A0;
 static const uint8_t A1  = PIN_A1;
@@ -216,7 +223,7 @@ static const uint8_t SCL = PIN_WIRE_SCL;
 /*
  * USB
  */
-#define PIN_USB_HOST_ENABLE (27ul) // TODO: Wat is dit? 
+#define PIN_USB_HOST_ENABLE (27ul) // TODO: Wat is dit? Want niet aangesloten.
 #define PIN_USB_DM          (28ul)
 #define PIN_USB_DP          (29ul)
 
