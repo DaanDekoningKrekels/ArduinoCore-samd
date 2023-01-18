@@ -1,5 +1,5 @@
 /* BME280 Wire LoRa formatting
- * Deze code toont de werking van een BME28 
+ * Deze code toont de werking van een BME280 
  * en zet de temperatuur, luchtvochtigheid en luchtdruk om naar een array
  * om gemakkelijk door te sturen via LoRaWAN. 
  *
