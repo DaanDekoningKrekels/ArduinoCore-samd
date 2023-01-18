@@ -9,11 +9,13 @@
 
 // This example code is in the public domain.
 
-/* Deze code kan gebruikt worden om de I2C verbinding van de SAMDaaNo21 te testen.
+/* SAMDaaNo21 master writer
+ * Deze code kan gebruikt worden om de I2C verbinding van de SAMDaaNo21 te testen.
  * Sluit een oscilloscoop aan en zet het trigger type op I2C 
  * of gebruik een andere MCU om de berichten te ontvangen. 
+ * De SerialUSB is ingebruik voor extra informatie over de verloop.
  * Het signaal is aanwezig op de S4CDA en S4SCL pinnen. 
- * Een pull-up weerstand is aanwezig aan de onderkant van de pcb.
+ * Een pull-up weerstand is aanwezig aan de onderkant van de printplaat.
  */
 
 

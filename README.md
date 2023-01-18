@@ -3,11 +3,12 @@
 This repository contains the source code and configuration files of the Arduino Core
 for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards).
 
+This code has been changed to work for the FLWSB SAMDaaNo21 development board.
 
 ## SAMDaaNo21 toevoegen aan de Arduino IDE
 
 
-Om de SAMDaaNo21 werkende te krijgen met een IDE zoals die van Arduino moeten we eerst een compatibele bootloader op de MCU hebben staan. Wij maken gebruik van de ATSAMD21G16B en spijtig genoeg zijn hier geen kant en klare bootloaders voor. Omdat we de printplaat zelf hebben ontworpen zijn er uiteraard ook geen volledig compatibele configuraties beschikbaar.
+Om de SAMDaaNo21 werkende te krijgen met een IDE zoals die van Arduino moeten we eerst een compatibele bootloader op de MCU hebben staan. Wij maken gebruik van de ATSAMD21G16B en spijtig genoeg zijn hier geen kant-en-klare bootloaders voor. Omdat we de printplaat zelf hebben ontworpen zijn er uiteraard ook geen volledig compatibele configuraties beschikbaar.
 
 Het toevoegen voor ondersteuning verloopt in een aantal stappen:
 
@@ -18,7 +19,7 @@ Het toevoegen voor ondersteuning verloopt in een aantal stappen:
   - OpenOCD script aanpassen
   - Pinout en functies definiëren
 
-Bij deze stappen hebben we ons gebaseerd op de Arduino Zero. Deze heeft echter een ATSAMD21G18A, dat is een variant met meer geheugen.
+Bij deze stappen hebben we ons gebaseerd op de Arduino Zero. Deze heeft echter een ATSAMD21G18A, dat is een variant van de MCU met meer geheugen.
 
 Alle nodige broncode is te verkrijgen van de [ArduinoCore-samd](https://github.com/arduino/ArduinoCore-samd) GitHub repository. ([Onze fork](https://github.com/DaanDekoningKrekels/ArduinoCore-samd))
 
@@ -45,7 +46,7 @@ https://hackaday.io/project/8007-hack/log/41354-docs-how-the-variant-system-work
 
 ## Installatie binnen de Arduino IDE
 
-De onderstuning voor het FLWSB bord is nog niet op een toegankelijke manier te installeren. Je kan echter wel de stappen volgen onder [#Developing](#Developing) om het toe te voegen. 
+De ondersteuning voor het FLWSB bord is nog niet op een toegankelijke manier te installeren. Je kan echter wel de stappen volgen onder [#Developing](#Developing) om het toe te voegen. 
 
 ## Bugs or Issues
 

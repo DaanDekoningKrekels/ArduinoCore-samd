@@ -1,8 +1,8 @@
 ## Arduino variant
 
-Wanneer de bootloader op de SAMDaaNo21 straat en je sluit de USB poort aan, zal je onder `tools`-> `port` een apparaat zien staan!
+Wanneer de bootloader op de SAMDaaNo21 staat en je sluit de USB-poort aan, zal je onder `tools`-> `port` een apparaat zien staan!
 
-We kunnen echter nog niets programmeren naar de SAMDaano21 omdat de Arduino IDE niet weet hoe het apparaat werkt. In de volgende stappen voegen we een Arduino variant toe aan de IDE.
+We kunnen echter nog niets uploaden naar de SAMDaano21 omdat de Arduino IDE niet weet hoe het apparaat werkt. In de volgende stappen voegen we een Arduino variant toe aan de IDE.
 
 Hiervoor speelt het meeste zich af in de ./variants/ folder van de GitHub repo, `boards.txt` passen we ook aan.
 
