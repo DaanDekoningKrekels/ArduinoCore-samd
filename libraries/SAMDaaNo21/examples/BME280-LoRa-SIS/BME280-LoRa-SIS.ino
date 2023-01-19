@@ -31,7 +31,7 @@ unsigned long delayTime;
   | 4-5     | Wind Speed      | 0.0 tot 32.7 m/s | *10         | /10      | - niet nu
   | 6-7     | Ground Moisture | 0 tot 1023       | n/a         | n/a      | - niet nu
 */
-void getDataFormattedBME(byte (&BMEdata)[5]) {
+void getDataFormattedBME(byte (&BMEdata)[6]) {
   int temperature = int((bme.readTemperature() + 40) * 100);  // minimale temeratuur van -40 erbij tellen en komma compenseren
   int pressure = int(round(bme.readPressure() / 100));
   byte humidity = round(bme.readHumidity());
@@ -45,13 +45,14 @@ void getDataFormattedBME(byte (&BMEdata)[5]) {
   Serial.print("hum: ");
   Serial.println(humidity, HEX);
   Serial.println(humidity, DEC);
+  BMEdata[0] = 8;  // SIS adres doorsturen
   // Temperatuur int opsplitsen in twee bytes  
-  BMEdata[0] = highByte(temperature);
-  BMEdata[1] = lowByte(temperature);
+  BMEdata[1] = highByte(temperature);
+  BMEdata[2] = lowByte(temperature);
   // Druk int opsplitsen in twee bytes  
-  BMEdata[2] = highByte(pressure);
-  BMEdata[3] = lowByte(pressure);
-  BMEdata[4] = humidity;
+  BMEdata[3] = highByte(pressure);
+  BMEdata[4] = lowByte(pressure);
+  BMEdata[5] = humidity;
 }
 
 void setup() {
@@ -67,7 +68,7 @@ void setup() {
     while (1) delay(10);
   }
   Serial.println("-- Default Test --");
-  delayTime = 1000;
+  delayTime = 60000;
   Serial.println();
 }
 
@@ -103,20 +104,20 @@ void initialize_radio() {
 }
 
 void loop() {
-  byte BMEdata[5];               // Lege array om nog te laten vullen met metingen
+  byte BMEdata[6];               // Lege array om nog te laten vullen met metingen
   getDataFormattedBME(BMEdata);  // Array laten vullen
-  myLora.txBytes(BMEdata, 5);
+  myLora.txBytes(BMEdata, 6);
   Serial.println("==Data in array (HEX)==");
-  Serial.print("0: ");
-  Serial.println(BMEdata[0], HEX);  // Temp 1
   Serial.print("1: ");
-  Serial.println(BMEdata[1], HEX);  // Temp 2
+  Serial.println(BMEdata[1], HEX);  // Temp 1
   Serial.print("2: ");
-  Serial.println(BMEdata[2], HEX);  // Press 1
+  Serial.println(BMEdata[2], HEX);  // Temp 2
   Serial.print("3: ");
-  Serial.println(BMEdata[3], HEX);  // Press 2
+  Serial.println(BMEdata[3], HEX);  // Press 1
   Serial.print("4: ");
-  Serial.println(BMEdata[4], HEX);  // Hum
+  Serial.println(BMEdata[4], HEX);  // Press 2
+  Serial.print("5: ");
+  Serial.println(BMEdata[5], HEX);  // Hum
   delay(50);
   printValues();
   delay(delayTime);
