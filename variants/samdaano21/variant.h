@@ -175,10 +175,10 @@ static const uint8_t ATN = PIN_ATN;
 // Serial1
 // Serial voor de LoRaWAN module
 // PA9 kan niet meer gebruikt worden door fix voor vekeerd aangesloten RX en TX.
-#define PIN_SERIAL2_RX       (8ul)
-#define PIN_SERIAL2_TX       (10ul)
-#define PAD_SERIAL2_TX       (UART_TX_PAD_2)
-#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_0)
+#define PIN_SERIAL2_RX       (9ul)
+#define PIN_SERIAL2_TX       (8ul)
+#define PAD_SERIAL2_TX       (UART_TX_PAD_0)
+#define PAD_SERIAL2_RX       (SERCOM_RX_PAD_1)
 
 // Serial2
 #define PIN_SERIAL3_RX       (16ul)
